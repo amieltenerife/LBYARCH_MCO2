@@ -1,15 +1,67 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
 
 extern double dotprod(int n, double* vector1, double* vector2);
 
+void read_vector(const char* filename, double* vector, size_t size) {
+	FILE* file = fopen(filename, "rb");
+	if (!file) {
+		perror("Failed to open file");
+		exit(EXIT_FAILURE);
+	}
+	
+	fread(vector, sizeof(double), size, file);
+	fclose(file);
+}
+
 int main() {
-	double vector1[] = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 10.10};
-	double vector2[] = {11.11, 12.12, 13.13, 14.14, 15.15, 16.16, 17.17, 18.18, 19.19, 20.20};
-	int n = 10;
+	size_t size20 = 1 << 20;
+	size_t size24 = 1 << 24;
+
+	double* vector1 = malloc(size20 * sizeof(double));
+	double* vector2 = malloc(size20 * sizeof(double));
+
+	if (!vector1 || !vector2) {
+		perror("Failed to allocate memory");
+		return EXIT_FAILURE;
+	}
 	
-	double sdot = dotprod(n, vector1, vector2);
+	read_vector("vector1.bin", vector1, size20);
+	read_vector("vector2.bin", vector2, size20);
+
+	clock_t start_time = clock();
+	double sdot = dotprod(size20, vector1, vector2);
+	clock_t end_time = clock();
+	double elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+	printf("sdot (20): %.2f\n", sdot);
+	printf("elapsed time: %.4f seconds\n\n", elapsed_time);
+
+	free(vector1);
+	free(vector2);
+
+	vector1 = malloc(size24 * sizeof(double));
+	vector2 = malloc(size24 * sizeof(double));
+
+	if (!vector1 || !vector2) {
+		perror("Failed to allocate memory");
+		return EXIT_FAILURE;
+	}
+
+	read_vector("vector1_large.bin", vector1, size24);
+	read_vector("vector2_large.bin", vector2, size24);
 	
-	printf("%.2f", sdot);
+	start_time = clock();
+	sdot = dotprod(size24, vector1, vector2);
+	end_time = clock();
+	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+	
+	printf("sdot (24): %.2f\n", sdot);
+	printf("elapsed time: %.4f seconds", elapsed_time);
+	
+	free(vector1);
+	free(vector2);
 	
 	return 0;
 }
