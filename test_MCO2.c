@@ -15,6 +15,7 @@ void read_vector(const char* filename, double* vector, size_t size) {
 int main() {
 	size_t size20 = 1 << 20;
 	size_t size24 = 1 << 24;
+	size_t size29 = 1 << 29;
 	double* vector1 = malloc(size20 * sizeof(double));
 	double* vector2 = malloc(size20 * sizeof(double));
 	double sum = 0;
@@ -53,8 +54,29 @@ int main() {
 		sum += vector1[i] * vector2[i];
 	}
 	
-	printf("sdot (24): %.2f", sum);
+	printf("sdot (24): %.2f\n", sum);
 	
+	free(vector1);
+	free(vector2);
+
+	vector1 = malloc(size29 * sizeof(double));
+	vector2 = malloc(size29 * sizeof(double));
+	sum = 0;
+
+	if (!vector1 || !vector2) {
+		perror("Failed to allocate memory");
+		return EXIT_FAILURE;
+	}
+
+	read_vector("vector1_largest.bin", vector1, size29);
+	read_vector("vector2_largest.bin", vector2, size29);
+
+	for (i = 0; i < size29; i++) {
+		sum += vector1[i] * vector2[i];
+	}
+
+	printf("sdot (29): %.2f", sum);
+
 	free(vector1);
 	free(vector2);
 	

@@ -18,6 +18,7 @@ void read_vector(const char* filename, double* vector, size_t size) {
 int main() {
 	size_t size20 = 1 << 20;
 	size_t size24 = 1 << 24;
+	size_t size29 = 1 << 29;
 
 	double* vector1 = malloc(size20 * sizeof(double));
 	double* vector2 = malloc(size20 * sizeof(double));
@@ -58,10 +59,29 @@ int main() {
 	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 	
 	printf("sdot (24): %.2f\n", sdot);
-	printf("elapsed time: %.4f seconds", elapsed_time);
+	printf("elapsed time: %.4f seconds\n\n", elapsed_time);
 	
 	free(vector1);
 	free(vector2);
+
+	vector1 = malloc(size29 * sizeof(double));
+	vector2 = malloc(size29 * sizeof(double));
+
+	if (!vector1 || !vector2) {
+		perror("Failed to allocate memory");
+		return EXIT_FAILURE;
+	}
+
+	read_vector("vector1_largest.bin", vector1, size29);
+	read_vector("vector2_largest.bin", vector2, size29);
+	
+	start_time = clock();
+	sdot = dotprod(size29, vector1, vector2);
+	end_time = clock();
+	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+	
+	printf("sdot (29): %.2f\n", sdot);
+	printf("elapsed time: %.4f seconds", elapsed_time);
 	
 	return 0;
 }
