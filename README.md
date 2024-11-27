@@ -13,7 +13,7 @@ Screenshot of the Result After Running the Kernel:
 Screenshot of the Results of the C Reference Program and the Kernel Program:
 ![C Program and Kernel Program Result](C_Kernel_Result.png)
 
-Average Execution Times:
-For 2^20 Double-Precision Floating Point Values - 0.00095 seconds
-For 2^24 Double-Precision Floating Point Values - 0.0138 seconds
-For 2^29 Double-Precision Floating Point Values - 0.4664 seconds
+Average Execution Times:\n
+For 2^20 Double-Precision Floating Point Values - 0.00095 seconds\n
+For 2^24 Double-Precision Floating Point Values - 0.0138 seconds\n
+For 2^29 Double-Precision Floating Point Values - 0.4664 seconds\n
