@@ -17,3 +17,6 @@ Average Execution Times:<br/>
 For 2^20 Double-Precision Floating Point Values - 0.00095 seconds<br/>
 For 2^24 Double-Precision Floating Point Values - 0.0138 seconds<br/>
 For 2^29 Double-Precision Floating Point Values - 0.4664 seconds<br/>
+
+Analysis: <br/>
+After getting the average execution time of each vector, it can be said that the length of the vector and the average execution time are dependent of each other. As the length of each vector increases, the execution time also increases. This is because a vector with a larger length increases the size of the bin file and more memory will be have to be allocated for the read and write operations, resulting to longer execution times.
