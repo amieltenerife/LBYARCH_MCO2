@@ -9,3 +9,6 @@ Screenshot of the Result After Running the C Reference Program:
 
 Screenshot of the Result After Running the Kernel:
 ![Kernel Program Result](image-1.png)
+
+Screenshot of the Results of the C Reference Program and the Kernel Program:
+![C Program and Kernel Program Result](image-2.png)
