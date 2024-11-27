@@ -81,7 +81,7 @@ int main() {
 	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 	
 	printf("sdot (29): %.2f\n", sdot);
-	printf("elapsed time: %.4f seconds", elapsed_time);
+	printf("elapsed time: %.4f seconds\n", elapsed_time);
 	
 	return 0;
 }
