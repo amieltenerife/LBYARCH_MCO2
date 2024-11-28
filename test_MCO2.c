@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 
+/*
 void read_vector(const char* filename, double* vector, size_t size) {
 	FILE* file = fopen(filename, "rb");
 	if (!file) {
@@ -11,8 +13,10 @@ void read_vector(const char* filename, double* vector, size_t size) {
 	fread(vector, sizeof(double), size, file);
 	fclose(file);
 }
+*/
 
 int main() {
+	/*
 	size_t size20 = 1 << 20;
 	size_t size24 = 1 << 24;
 	size_t size29 = 1 << 29;
@@ -79,6 +83,39 @@ int main() {
 
 	free(vector1);
 	free(vector2);
+	*/
+
+	int n = 5;
+	double sum = 0;
+	int i;
+	double* A = (double*)malloc(n * sizeof(double));
+	double* B = (double*)malloc(n * sizeof(double));
+
+	if (!A || !B) {
+		perror("Failed to allocate memory");
+		return EXIT_FAILURE;
+	}
+
+	for (i = 0; i < n; i++) {
+		scanf("%lf", &A[i]);
+	}
+
+	for (i = 0; i < n; i++) {
+		scanf("%lf", &B[i]);
+	}
+
+	clock_t start_time = clock();
+	for (i = 0; i < n; i++){
+		sum += A[i] * B[i];
+	}
+	clock_t end_time = clock();
+	double elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+	printf("sdot: %.2f\n", sum);
+	printf("time: %.6f\n", elapsed_time);
+
+	free(A);
+	free(B);
 	
 	return 0;
 }

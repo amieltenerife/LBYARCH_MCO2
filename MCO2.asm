@@ -1,9 +1,14 @@
+section .data
+sdot dq 0.0
+
 section .text
 bits 64
 default rel
 global dotprod
 
 dotprod:
+    movsd xmm0, [sdot]
+    
     L1:
         movsd xmm2, qword [rdx]
         movsd xmm3, qword [r8]
